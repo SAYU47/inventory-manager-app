@@ -41,7 +41,7 @@ export default function TypePage() {
         </Button>
       </Box>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{padding: 2}}>
         {typeItems.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item.id}>
             <ItemCard item={item} type={currentType} />

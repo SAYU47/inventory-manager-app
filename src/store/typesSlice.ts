@@ -63,7 +63,7 @@ const typesSlice = createSlice({
     ) => {
       const { typeId, field } = action.payload;
       const type = state.find(type => type.id === typeId);
-      
+
       if (type) {
         const newField: Field = {
           id: uuid(),
@@ -79,7 +79,7 @@ const typesSlice = createSlice({
     ) => {
       const { typeId, field } = action.payload;
       const type = state.find(type => type.id === typeId);
-      
+
       if (!type) return;
 
       const fieldIndex = type.fields.findIndex(f => f.id === field.id);
@@ -94,7 +94,7 @@ const typesSlice = createSlice({
     ) => {
       const { typeId, fieldId } = action.payload;
       const type = state.find(type => type.id === typeId);
-      
+
       if (type) {
         type.titleFieldId = fieldId;
       }
@@ -103,7 +103,19 @@ const typesSlice = createSlice({
     removeType: (state, action: PayloadAction<string>) => {
       return state.filter(type => type.id !== action.payload);
     },
+    removeField: (state, action: PayloadAction<{ typeId: string; fieldId: string }>) => {
+      const { typeId, fieldId } = action.payload;
+      const type = state.find(type => type.id === typeId);
+
+      if (type) {
+        type.fields = type.fields.filter(field => field.id !== fieldId);
+        if (type.titleFieldId === fieldId) {
+          type.titleFieldId = undefined;
+        }
+      }
+    },
   },
+
 });
 
 export const {
@@ -113,6 +125,7 @@ export const {
   updateField,
   setTitleField,
   removeType,
+  removeField
 } = typesSlice.actions;
 
 export default typesSlice.reducer;

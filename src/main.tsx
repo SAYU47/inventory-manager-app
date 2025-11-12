@@ -4,10 +4,10 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppShell from "./components/AppShell";
-import Home from "./views/Home";
-import TypePage from "./views/TypePage";
-import ManageTypes from "./views/ManageTypes";
+import App from "./components/App";
+import HomePage from "./pages/HomePage";
+import TypePage from "./pages/TypePage";
+import ManageTypesPage from "./pages/ManageTypesPage";
 import "./store/persistence";
 import { store } from "./store/store";
 const theme = createTheme({ palette: { mode: "light" } });
@@ -17,13 +17,13 @@ createRoot(document.getElementById("root")!).render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <AppShell>
+          <App>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/type/:id" element={<TypePage />} />
-              <Route path="/manage" element={<ManageTypes />} />
+              <Route path="/manage" element={<ManageTypesPage />} />
             </Routes>
-          </AppShell>
+          </App>
         </BrowserRouter>
       </ThemeProvider>
     </Provider>

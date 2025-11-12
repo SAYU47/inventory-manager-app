@@ -6,7 +6,7 @@ import CreateTypeCard from "../widgets/CreateTypeCard";
 import TypeCard from "../widgets/TypeCard";
 
 
-export default function ManageTypes() {
+export default function ManageTypesPage() {
   const types = useSelector((state: RootState) => state.types);
   const [newTypeName, setNewTypeName] = useState("");
 

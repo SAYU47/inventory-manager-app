@@ -5,7 +5,7 @@ import { addItem } from "../store/itemsSlice";
 import ItemCard from "../widgets/ItemCard";
 import { Box, Button, Grid, Typography } from "@mui/material";
 
-export default function Home() {
+export default function HomePage() {
   const types = useSelector((state: RootState) => state.types);
   const items = useSelector((state: RootState) => state.items);
   const dispatch = useDispatch();

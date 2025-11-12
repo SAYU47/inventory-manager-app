@@ -5,6 +5,7 @@ import {
   updateTypeName,
   removeType,
   addField,
+  removeField,
 } from "../store/typesSlice";
 import { MachineType } from "../types";
 import {
@@ -54,6 +55,10 @@ export default function TypeCard({ type }: TypeCardProps) {
     dispatch(removeType(type.id));
   };
 
+  const handleRemoveField = (fieldId: string) => {
+    dispatch(removeField({ typeId: type.id, fieldId }));
+  };
+
   return (
     <Card sx={{ marginBottom: 3 }}>
       <CardContent>
@@ -70,7 +75,7 @@ export default function TypeCard({ type }: TypeCardProps) {
             onChange={(event) => handleUpdateTypeName(event.target.value)}
             sx={{ width: 300 }}
           />
-          <IconButton 
+          <IconButton
             onClick={handleRemoveType}
             aria-label={`Delete ${type.name}`}
           >
@@ -91,7 +96,7 @@ export default function TypeCard({ type }: TypeCardProps) {
             key={field.id}
             sx={{ marginTop: 1 }}
           >
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               <TextField
                 fullWidth
                 label="Field Name"
@@ -116,10 +121,18 @@ export default function TypeCard({ type }: TypeCardProps) {
                 <MenuItem value="checkbox">Checkbox</MenuItem>
               </Select>
             </Grid>
+            <Grid item xs={3}>
+              <IconButton
+                onClick={() => handleRemoveField(field.id)}
+                aria-label={`Delete field ${field.name}`}
+                color="default"
+                size="small"
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
           </Grid>
         ))}
-
-        {/* Actions Section */}
         <Box sx={{ display: "flex", gap: 2, marginTop: 2 }}>
           <Button
             variant="outlined"
@@ -127,7 +140,7 @@ export default function TypeCard({ type }: TypeCardProps) {
           >
             Add Field
           </Button>
-          
+
           <Select
             value={type.titleFieldId || ""}
             onChange={(event) =>
